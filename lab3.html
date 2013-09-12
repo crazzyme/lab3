@@ -1,0 +1,58 @@
+<body style="background-color:skyblue">
+<h1> ASE lab 3 Mashup application </h1>
+<h2> Getting the current location </h2>
+<p id="sample"> click below for the current location </p>
+<button onclick="getloc()">current location </button>
+<div id="maps">
+<script>
+var x=document.getElementById("sample");
+function getloc()
+  {
+  if (navigator.geolocation)
+    {
+    navigator.geolocation.getCurrentPosition(showPosition,showError);
+    }
+  else{x.innerHTML="Geolocation is not supported by this browser.";}
+  }
+
+function showPosition(position)
+  {
+  var latlon=position.coords.latitude+","+position.coords.longitude;
+
+  var img_url="http://maps.googleapis.com/maps/api/staticmap?center="
+  +latlon+"&zoom=14&size=400x300&sensor=false";
+  document.getElementById("maps").innerHTML="<img src='"+img_url+"'>";
+  }
+
+function showError(error)
+  {
+  switch(error.code) 
+    {
+    case error.PERMISSION_DENIED:
+      x.innerHTML="User denied the request for Geolocation."
+      break;
+    case error.POSITION_UNAVAILABLE:
+      x.innerHTML="Location information is unavailable."
+      break;
+    case error.TIMEOUT:
+      x.innerHTML="The request to get user location timed out."
+      break;
+    case error.UNKNOWN_ERROR:
+      x.innerHTML="An unknown error occurred."
+      break;
+    }
+  }
+    </script>
+</div>
+         <p> weather can be found on clicking the following window <p>
+         <a href="http://www.wunderground.com/cgi-bin/findweather/getForecast?query=kansas"> click </a>
+<br>
+    <p> Chart of the weather during the last 7 days</p>
+    <img src=https://chart.googleapis.com/chart?cht=bhs&chco=4D89F9,C6D9FD&chd=t:38,40,30,36,35,42,44&chs=250x200&chl=10|20|30|40|50|60|70|80 </img>
+        <br>
+            <p> tweet the kansas related things over twitter </p>            
+<a href="https://twitter.com/intent/tweet?screen_name=twitterapi" class="twitter-mention-button" data-lang="en">Tweet to @twitterapi</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
+    
